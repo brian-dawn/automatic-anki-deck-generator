@@ -10,6 +10,7 @@ genanki = "^0.13.0"
 boto3 = "^1.20.31"
 jamdict = "^0.1a11"
 jamdict-data = "^1.5"
+pykakasi = "^2.2.1"
 
 [tool.poetry.dev-dependencies]
 black = "^21.12b0"

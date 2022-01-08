@@ -2,6 +2,9 @@ import genanki
 import boto3
 from jamdict import Jamdict
 
+# TODO: Make use of this to display other writing systems.
+import pykakasi
+
 # TODO: Remove if default is desired.
 boto3.setup_default_session(profile_name="personal")
 
@@ -47,8 +50,14 @@ model = genanki.Model(
     templates=[
         {
             "name": "Card 1",
-            "qfmt": "{{Question}}",
-            "afmt": '{{FrontSide}}<hr id="answer">{{Answer}}{{MyMedia}}',
+            "qfmt": "<center><h1>{{Question}}</h1></center>",
+            "afmt": """
+            {{FrontSide}}
+            <hr id="answer">
+            <center><h1>{{Answer}}</h1></center>
+            <br />
+            <center>{{MyMedia}}</center>
+            """,
         },
     ],
 )
