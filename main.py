@@ -64,7 +64,15 @@ model = genanki.Model(
 
 deck = genanki.Deck(2059400110, "Automatic Japanese Deck Test")
 
-media_files = [add_card(deck, model, "assistant")]
+words = """
+assistant
+Argentina
+camera
+ice cream
+"""
+media_files = [
+    add_card(deck, model, word.strip()) for word in words.strip().split("\n")
+]
 
 pkg = genanki.Package(deck)
 pkg.media_files = media_files
