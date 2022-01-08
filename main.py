@@ -2,6 +2,8 @@ import genanki
 import boto3
 from jamdict import Jamdict
 
+# TODO: Remove if default is desired.
+boto3.setup_default_session(profile_name="personal")
 
 polly_client = boto3.Session(region_name="us-west-2").client("polly")
 
@@ -21,15 +23,17 @@ def add_card(deck, model, word):
         VoiceId="Takumi", OutputFormat="mp3", Text=japanese, Engine="neural"
     )
 
-    with open(f"{english}.mp3", "wb") as f:
+    sample_fname = f"{word}.mp3"
+
+    with open(sample_fname, "wb") as f:
         f.write(response["AudioStream"].read())
 
-    note = genanki.Note(model=model, fields=[japanese, english])
+    note = genanki.Note(
+        model=model, fields=[japanese, english, f"[sound:{sample_fname}]"]
+    )
     deck.add_note(note)
 
-
-def deck_from_word_list():
-    pass
+    return sample_fname
 
 
 model = genanki.Model(
@@ -49,10 +53,10 @@ model = genanki.Model(
     ],
 )
 
-deck = genanki.Deck(2059400110, "Example words")
+deck = genanki.Deck(2059400110, "Automatic Japanese Deck Test")
 
-add_card(deck, model, "assistant")
+media_files = [add_card(deck, model, "assistant")]
 
 pkg = genanki.Package(deck)
-# pkg.media_files = ... TODO
+pkg.media_files = media_files
 pkg.write_to_file("output.apkg")
