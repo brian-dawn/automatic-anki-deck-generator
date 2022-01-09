@@ -6,7 +6,12 @@ import boto3
 import pykakasi
 
 # TODO: Remove if default is desired.
-boto3.setup_default_session(profile_name="personal")
+aws_profile_override = os.environ.get("AWS_PROFILE")
+if aws_profile_override is not None:
+    print(f"Using AWS_PROFILE={aws_profile_override}")
+    boto3.setup_default_session(profile_name=aws_profile_override)
+else:
+    print("Using default AWS_PROFILE")
 
 polly_client = boto3.Session(region_name="us-west-2").client("polly")
 

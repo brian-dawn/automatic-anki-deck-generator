@@ -15,7 +15,10 @@ Once Poetry is installed:
     poetry shell
     python main.py
 
-This will create an apkg file that you can then load into Anki.
+This will create an apkg file that you can then load into Anki. If you have multiple AWS profiles you can choose one by setting the 
+`AWS_PROFILE` environment variable.
+
+    AWS_PROFILE=personal python main.py
 
 ## Side goals
 
