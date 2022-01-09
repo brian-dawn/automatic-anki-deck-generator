@@ -58,6 +58,12 @@ japanese_to_english_model = genanki.Model(
         {"name": "Answer"},
         {"name": "MyMedia"},
     ],
+    css="""
+    .card {
+        font-family: arial;
+        font-size: 3em;
+    }
+    """,
     templates=[
         {
             "name": "Card 1",
@@ -65,7 +71,7 @@ japanese_to_english_model = genanki.Model(
             "afmt": """
             {{FrontSide}}
             <hr id="answer">
-            <center><h1>{{Answer}}</h1></center>
+            <center>{{Answer}}</center>
             <br />
             <center>{{MyMedia}}</center>
             """,
