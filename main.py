@@ -23,30 +23,31 @@ def add_card_japanese_to_english(deck, model, english, japanese):
     if not os.path.exists(sound_folder):
         os.mkdir(sound_folder)
 
-    sample_fname = f"{sound_folder}/{english}.mp3"
+    sample_fname = f"{english}.mp3"
+    sample_path = f"{sound_folder}/{english}.mp3"
 
-    if os.path.exists(sample_fname):
-
+    if os.path.exists(sample_path):
         print(f"{japanese} => {english} using cached")
-        return sample_fname
+    else:
+        # Run the text through Polly to get the audio.
 
-    print(f"{japanese} => {english}")
+        print(f"{japanese} => {english}")
 
-    # Also Mizuki but doesn't support Neural voice I think.
-    response = polly_client.synthesize_speech(
-        VoiceId="Takumi", OutputFormat="mp3", Text=japanese, Engine="neural"
-    )
+        # Also Mizuki but doesn't support Neural voice I think.
+        response = polly_client.synthesize_speech(
+            VoiceId="Takumi", OutputFormat="mp3", Text=japanese, Engine="neural"
+        )
 
-    with open(sample_fname, "wb") as f:
-        f.write(response["AudioStream"].read())
+        with open(sample_path, "wb") as f:
+            f.write(response["AudioStream"].read())
 
     note = genanki.Note(
         model=model,
-        fields=[japanese, english, f"[sound:{sound_folder}/{sample_fname}]"],
+        fields=[japanese, english, f"[sound:{sample_fname}]"],
     )
     deck.add_note(note)
 
-    return sample_fname
+    return sample_path
 
 
 japanese_to_english_model = genanki.Model(
