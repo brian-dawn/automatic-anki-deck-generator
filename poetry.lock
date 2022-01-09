@@ -73,14 +73,6 @@ optional = false
 python-versions = "*"
 
 [[package]]
-name = "chirptext"
-version = "0.1.2"
-description = "A minimalist collection of text processing tools for Python 3"
-category = "main"
-optional = false
-python-versions = ">=3.5"
-
-[[package]]
 name = "click"
 version = "8.0.3"
 description = "Composable command line interface toolkit"
@@ -144,26 +136,6 @@ optional = false
 python-versions = "*"
 
 [[package]]
-name = "jamdict"
-version = "0.1a11"
-description = "Python library for using Japanese dictionaries and resources (Jim Breen's JMdict, KanjiDic2, KRADFILE, JMnedict)"
-category = "main"
-optional = false
-python-versions = ">=3.6"
-
-[package.dependencies]
-chirptext = ">=0.1,<=0.2"
-puchikarui = ">=0.1,<0.3"
-
-[[package]]
-name = "jamdict-data"
-version = "1.5"
-description = "Precompiled database for jamdict library for manipulating Jim Breen's JMdict, KanjiDic2, KRADFILE and JMnedict. Compiled date: 17 Apr 2021."
-category = "main"
-optional = false
-python-versions = "*"
-
-[[package]]
 name = "jmespath"
 version = "0.10.0"
 description = "JSON Matching Expressions"
@@ -198,14 +170,6 @@ python-versions = ">=3.7"
 [package.extras]
 docs = ["Sphinx (>=4)", "furo (>=2021.7.5b38)", "proselint (>=0.10.2)", "sphinx-autodoc-typehints (>=1.12)"]
 test = ["appdirs (==1.4.4)", "pytest (>=6)", "pytest-cov (>=2.7)", "pytest-mock (>=3.6)"]
-
-[[package]]
-name = "puchikarui"
-version = "0.1"
-description = "A minimalist SQLite wrapper library for Python which supports ORM features."
-category = "main"
-optional = false
-python-versions = "*"
 
 [[package]]
 name = "pykakasi"
@@ -305,7 +269,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "ddf2174bfa4b7da0fe16b5de4f720e78ca22daaec50dcbb9daca63ac46b58720"
+content-hash = "83880f2fbab42cbbfe321ccaedc331dcffcef308385cb8eca89540bd4bb0de65"
 
 [metadata.files]
 black = [
@@ -327,9 +291,6 @@ cached-property = [
 chevron = [
     {file = "chevron-0.14.0-py3-none-any.whl", hash = "sha256:fbf996a709f8da2e745ef763f482ce2d311aa817d287593a5b990d6d6e4f0443"},
     {file = "chevron-0.14.0.tar.gz", hash = "sha256:87613aafdf6d77b6a90ff073165a61ae5086e21ad49057aa0e53681601800ebf"},
-]
-chirptext = [
-    {file = "chirptext-0.1.2.tar.gz", hash = "sha256:643c9c11508f509b37257e3f3a629a668c0908ae5f582d7b9f131234a7379303"},
 ]
 click = [
     {file = "click-8.0.3-py3-none-any.whl", hash = "sha256:353f466495adaeb40b6b5f592f9f91cb22372351c84caeb068132442a4518ef3"},
@@ -354,12 +315,6 @@ genanki = [
 jaconv = [
     {file = "jaconv-0.3.tar.gz", hash = "sha256:cc70c796c19a6765598c03eac59d1399a555a9a8839cc70e540ec26f0ec3e66e"},
 ]
-jamdict = [
-    {file = "jamdict-0.1a11.tar.gz", hash = "sha256:5a5669b7d6d003eb0485a7d55ae04ee2842544bcd3afc2e25f62dcad983a4291"},
-]
-jamdict-data = [
-    {file = "jamdict_data-1.5.tar.gz", hash = "sha256:a4247dd9bb3148ab17c1b32fc56d7a7f1c35293b0d6ff2838c811f896d13f415"},
-]
 jmespath = [
     {file = "jmespath-0.10.0-py2.py3-none-any.whl", hash = "sha256:cdf6525904cc597730141d61b36f2e4b8ecc257c420fa2f4549bac2c2d0cb72f"},
     {file = "jmespath-0.10.0.tar.gz", hash = "sha256:b85d0567b8666149a93172712e68920734333c0ce7e89b78b3e987f71e5ed4f9"},
@@ -375,9 +330,6 @@ pathspec = [
 platformdirs = [
     {file = "platformdirs-2.4.1-py3-none-any.whl", hash = "sha256:1d7385c7db91728b83efd0ca99a5afb296cab9d0ed8313a45ed8ba17967ecfca"},
     {file = "platformdirs-2.4.1.tar.gz", hash = "sha256:440633ddfebcc36264232365d7840a970e75e1018d15b4327d11f91909045fda"},
-]
-puchikarui = [
-    {file = "puchikarui-0.1.tar.gz", hash = "sha256:8ebe96e8683eac82624eb90dd517e26421e467637b3a1fe1ef5275ba2dacddc8"},
 ]
 pykakasi = [
     {file = "pykakasi-2.2.1-py3-none-any.whl", hash = "sha256:f2d3d12a684314d7f317314499f5b0bec4a711eef4cfc963a2ca6f5c3d68f3b3"},

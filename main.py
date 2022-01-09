@@ -1,6 +1,6 @@
+import os
 import genanki
 import boto3
-from jamdict import Jamdict
 
 # TODO: Make use of this to display other writing systems.
 import pykakasi
@@ -10,36 +10,41 @@ boto3.setup_default_session(profile_name="personal")
 
 polly_client = boto3.Session(region_name="us-west-2").client("polly")
 
-jam = Jamdict()
+sound_folder = "mp3s"
 
 
-def add_card(deck, model, word):
+def add_card_japanese_to_english(deck, model, english, japanese):
 
-    # Assume latest is most accurate.
-    found = jam.lookup(word).entries[0]
+    if not os.path.exists(sound_folder):
+        os.mkdir(sound_folder)
 
-    japanese, english = found.text().split(" : ")
+    sample_fname = f"{sound_folder}/{english}.mp3"
+
+    if os.path.exists(sample_fname):
+
+        print(f"{japanese} => {english} using cached")
+        return sample_fname
 
     print(f"{japanese} => {english}")
+
     # Also Mizuki but doesn't support Neural voice I think.
     response = polly_client.synthesize_speech(
         VoiceId="Takumi", OutputFormat="mp3", Text=japanese, Engine="neural"
     )
 
-    sample_fname = f"{word}.mp3"
-
     with open(sample_fname, "wb") as f:
         f.write(response["AudioStream"].read())
 
     note = genanki.Note(
-        model=model, fields=[japanese, english, f"[sound:{sample_fname}]"]
+        model=model,
+        fields=[japanese, english, f"[sound:{sound_folder}/{sample_fname}]"],
     )
     deck.add_note(note)
 
     return sample_fname
 
 
-model = genanki.Model(
+japanese_to_english_model = genanki.Model(
     1607392319,
     "Simple Model",
     fields=[
@@ -64,15 +69,27 @@ model = genanki.Model(
 
 deck = genanki.Deck(2059400110, "Automatic Japanese Deck Test")
 
-words = """
-assistant
-Argentina
-camera
-ice cream
+english_to_japanese_katakana = """
+assistant : アシスタント 
+Argentina : アルゼンチン 
+Brazil : ブラジル 
 """
-media_files = [
-    add_card(deck, model, word.strip()) for word in words.strip().split("\n")
-]
+
+
+def split_question_answer(line):
+    a, b = line.split(":")
+    return (a.strip(), b.strip())
+
+
+media_files = []
+for line in english_to_japanese_katakana.strip().splitlines():
+    english, japanese = split_question_answer(line)
+
+    media_file = add_card_japanese_to_english(
+        deck, japanese_to_english_model, english, japanese
+    )
+    media_files.append(media_file)
+
 
 pkg = genanki.Package(deck)
 pkg.media_files = media_files
