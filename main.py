@@ -5,7 +5,6 @@ import boto3
 # TODO: Make use of this to display other writing systems.
 import pykakasi
 
-# TODO: Remove if default is desired.
 aws_profile_override = os.environ.get("AWS_PROFILE")
 if aws_profile_override is not None:
     print(f"Using AWS_PROFILE={aws_profile_override}")
